@@ -1,4 +1,4 @@
-# KMBF2
+# Kab's Many Bugfixes 2
 
 Another bugfix mod for Pathfinder: Wrath of the Righteous, but maintained by Kab, author of KMBF (Kingmaker Bugfixes). 
 
