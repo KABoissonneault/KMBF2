@@ -1,0 +1,12 @@
+﻿{
+  "Id": "KMBF2",
+  "DisplayName": "Kab's Many Bugfixes",
+  "Author": "kaboissonneault",
+  "Version": "1.0.0",
+  "ManagerVersion": "0.27.11",
+  "Requirements": ["ModMenu-2.0.11"],
+  "AssemblyName": "KMBF2.dll",
+  "EntryMethod": "KMBF2.Main.Load",
+  "HomePage": "https://github.com/KABoissonneault/KMBF2",
+  "Repository": "https://raw.githubusercontent.com/KABoissonneault/KMBF2/master/Repository.json"
+}

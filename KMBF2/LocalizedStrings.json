@@ -1,0 +1,12 @@
+[
+  {
+    "Key": "KMBF2.SettingsName",
+    "ProcessTemplates": false,
+    "enGB": "Kab's Many Bugfixes 2"
+  },
+  {
+    "Key": "KMBF2.SettingNonStackWarning",
+    "ProcessTemplates": false,
+    "enGB": "Hide 'Non-stacking Bonuses' warnings"
+  }
+]
