@@ -44,6 +44,25 @@ namespace KMBF2.Blueprint
                     })
                     .Configure();
             }
+
+            // Non-living units should not have morale
+            if(PatchUtils.StartPatch("Non-Living Crusade Morale"))
+            {
+                void RemoveMorale(BlueprintCore.Utils.Blueprint<BlueprintReference<BlueprintUnit>> unit)
+                {
+                    UnitConfigurator.For(unit)
+                        .EditComponent<ArmyUnitComponent>(c =>
+                        {
+                            c.IsHaveMorale = false;
+                        })
+                        .Configure();
+                }
+
+                RemoveMorale(UnitRefs.ArmyZombieStandard);
+                RemoveMorale(UnitRefs.ArmyCyborgs);
+                RemoveMorale(UnitRefs.ArmyPlagueDragon);
+                RemoveMorale(UnitRefs.ArmyVampireNinjaPirates);
+            }
         }
     }
 }
