@@ -8,5 +8,10 @@
     "Key": "KMBF2.SettingNonStackWarning",
     "ProcessTemplates": false,
     "enGB": "Hide 'Non-stacking Bonuses' warnings"
+  },
+  {
+    "Key": "KMBF2.CrusadeBalanceChanges",
+    "ProcessTemplates": false,
+    "enGB": "Allow some minor Crusade balance changes when a unit has features that do nothing"
   }
 ]

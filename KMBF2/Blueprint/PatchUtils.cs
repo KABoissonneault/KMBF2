@@ -19,5 +19,19 @@ namespace KMBF2.Blueprint
             Main.Log.Log($"Patching '{patchName}'");
             return true;
         }
+
+        public static bool StartSettingPatch(string patchName, string settingName)
+        {
+            if(ModMenu.ModMenu.GetSettingValue<bool>(settingName))
+            {
+                Main.Log.Log($"Patching '{patchName}': setting '{settingName}' enabled");
+                return true;
+            }
+            else
+            {
+                Main.Log.Log($"Skipping patch '{patchName}': setting '{settingName}' disabled");
+                return false;
+            }
+        }
     }
 }

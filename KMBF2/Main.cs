@@ -74,6 +74,7 @@ public static class Main {
                 ModMenu.ModMenu.AddSettings(
                     SettingsBuilder.New("kmbf2-settings", LocalizationTool.GetString("KMBF2.SettingsName"))
                         .AddToggle(MakeToggle("kmbf2-nonstack-warning", "KMBF2.SettingNonStackWarning", defaultValue: false))
+                        .AddToggle(MakeToggle("kmbf2-crusade-balance", "KMBF2.CrusadeBalanceChanges", defaultValue: true))
                     );
 
                 SettingHarmonyPatch.RunPatches();
