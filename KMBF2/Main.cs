@@ -81,6 +81,7 @@ public static class Main {
 
                 CrusadeFixes.Apply();
                 LichFixes.Apply();
+                WarpriestFixes.Apply();
                 MiscFixes.Apply();
             }
             catch (Exception e)
