@@ -79,6 +79,7 @@ public static class Main {
 
                 SettingHarmonyPatch.RunPatches();
 
+                CrusadeFixes.Apply();
                 LichFixes.Apply();
                 MiscFixes.Apply();
             }
