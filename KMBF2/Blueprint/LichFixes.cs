@@ -79,6 +79,18 @@ namespace KMBF2.Blueprint
                     .Configure();
             }
 
+            if(PatchUtils.StartSettingPatch("Deadly Magic Spell Trigger", "kmbf2-deadly-magic"))
+            {
+                // Description says it should only affect spells.
+                // While this is generally a nerf, this also prevents lots of invisible effects like the Belt of Demonc Shadow from silencing the party
+                BuffConfigurator.For(BuffRefs.DeadlyMagicBuff)
+                    .EditComponent<AddAbilityUseTrigger>(c =>
+                    {
+                        c.CheckAbilityType = true;
+                        c.Type = AbilityType.Spell;
+                    })
+                    .Configure();
+            }
         }
     }
 }
