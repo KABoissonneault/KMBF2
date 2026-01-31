@@ -47,9 +47,11 @@ public static class Main {
         SettingHarmonyPatch.OnSettingUpdated(settingKey, value);
     }
 
-    public static Toggle MakeToggle(string settingKey, string localizationKey, bool defaultValue)
+    public static Toggle MakeToggle(string settingKey, string localizationDescriptionKey, string localizationLongDescriptionKey, bool defaultValue)
     {
-        return Toggle.New(settingKey, defaultValue, LocalizationTool.GetString(localizationKey)).OnValueChanged(v => OnBoolSettingChanged(settingKey, v));
+        return Toggle.New(settingKey, defaultValue, LocalizationTool.GetString(localizationDescriptionKey))
+            .WithLongDescription(LocalizationTool.GetString(localizationLongDescriptionKey))
+            .OnValueChanged(v => OnBoolSettingChanged(settingKey, v));
     }
 
     [HarmonyPatch(typeof(BlueprintsCache))]
@@ -73,8 +75,9 @@ public static class Main {
                 // Settings!
                 ModMenu.ModMenu.AddSettings(
                     SettingsBuilder.New("kmbf2-settings", LocalizationTool.GetString("KMBF2.SettingsName"))
-                        .AddToggle(MakeToggle("kmbf2-nonstack-warning", "KMBF2.SettingNonStackWarning", defaultValue: false))
-                        .AddToggle(MakeToggle("kmbf2-crusade-balance", "KMBF2.CrusadeBalanceChanges", defaultValue: true))
+                        .AddToggle(MakeToggle("kmbf2-nonstack-warning", "KMBF2.SettingNonStackWarning", "KMBF2.SettingLongNonStackWarning", defaultValue: false))
+                        .AddToggle(MakeToggle("kmbf2-crusade-balance", "KMBF2.SettingCrusadeBalanceChanges", "KMBF2.SettingLongCrusadeBalanceChanges", defaultValue: true))
+                        .AddToggle(MakeToggle("kmbf2-deadly-magic", "KMBF2.SettingDeadlyMagicSpellTrigger", "KMBF2.SettingLongDeadlyMagicSpellTrigger", defaultValue: false))
                     );
 
                 SettingHarmonyPatch.RunPatches();

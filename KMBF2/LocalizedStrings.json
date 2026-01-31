@@ -10,8 +10,28 @@
     "enGB": "Hide 'Non-stacking Bonuses' warnings"
   },
   {
-    "Key": "KMBF2.CrusadeBalanceChanges",
+    "Key": "KMBF2.SettingLongNonStackWarning",
     "ProcessTemplates": false,
-    "enGB": "Allow some minor Crusade balance changes when a unit has features that do nothing"
+    "enGB": "For those who know how bonus stacking works and don't need reminders."
+  },
+  {
+    "Key": "KMBF2.SettingCrusadeBalanceChanges",
+    "ProcessTemplates": false,
+    "enGB": "Allow Crusade balance changes"
+  },
+  {
+    "Key": "KMBF2.SettingLongCrusadeBalanceChanges",
+    "ProcessTemplates": false,
+    "enGB": "Some Crusade design makes no sense and needs fixing. See changelog for impact. Not as impactful as you might think."
+  },
+  {
+    "Key": "KMBF2.SettingDeadlyMagicSpellTrigger",
+    "ProcessTemplates": false,
+    "enGB": "Mythic Lich Deadly Magic spell trigger"
+  },
+  {
+    "Key": "KMBF2.SettingLongDeadlyMagicSpellTrigger",
+    "ProcessTemplates": false,
+    "enGB": "Makes Mythic Lich Deadly Magic only trigger on spells. This avoids invisible triggers (ex: Belt of Demonic Shadow) silencing your party, but also nerfs it if you relied on abilities to trigger it."
   }
 ]
