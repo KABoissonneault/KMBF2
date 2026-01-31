@@ -11,6 +11,7 @@ using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs;
 using BlueprintCore.Blueprints.References;
 using Kingmaker.Armies.Components;
 using Kingmaker.Blueprints;
+using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.FactLogic;
 using Kingmaker.UnitLogic.Mechanics.Components;
@@ -89,6 +90,45 @@ namespace KMBF2.Blueprint
                         c.CheckAbilityType = true;
                         c.Type = AbilityType.Spell;
                     })
+                    .Configure();
+            }
+
+            // Bring parity to the actual undead immunities
+            // I could respect TTT's removal of the Nauseated/Sickened immunities, but given that TTT does not implement the rule
+            // where undead are immune to the effects of Fortitude saving throws, I think it's more accurate to keep them
+            if(PatchUtils.StartPatch("Blessing of Unlife Immunities"))
+            {
+                BuffConfigurator.For(BuffRefs.BlessingOfUnlifeBuff)
+                    .AddComponent<AddConditionImmunity>(c =>
+                    {
+                        c.Condition = Kingmaker.UnitLogic.UnitCondition.Paralyzed;
+                    })
+                    .AddComponent<AddConditionImmunity>(c =>
+                    {
+                        c.Condition = Kingmaker.UnitLogic.UnitCondition.Exhausted;
+                    })
+                    .EditComponents<BuffDescriptorImmunity>(c =>
+                    {
+                        c.Descriptor = SpellDescriptor.Sickened | SpellDescriptor.Fatigue | SpellDescriptor.Nauseated | SpellDescriptor.Exhausted | SpellDescriptor.Paralysis 
+                        | SpellDescriptor.Death | SpellDescriptor.Bleed | SpellDescriptor.VilderavnBleed | SpellDescriptor.Petrified | SpellDescriptor.NegativeLevel;
+                    }, c => c.name == "$BuffDescriptorImmunity$eb929088-4f9e-4c60-92ee-89a0fa13d8f1")
+                    .EditComponents<BuffDescriptorImmunity>(c =>
+                    {
+                        c.Descriptor = SpellDescriptor.MindAffecting | SpellDescriptor.Fear | SpellDescriptor.Compulsion | SpellDescriptor.Emotion | SpellDescriptor.Charm
+                        | SpellDescriptor.Daze | SpellDescriptor.Shaken | SpellDescriptor.Frightened | SpellDescriptor.Stun | SpellDescriptor.Confusion | SpellDescriptor.Sleep;
+                        c.m_IgnoreFeature = FeatureRefs.UndeadMindAffection.Cast<BlueprintUnitFactReference>().Reference;
+                    }, c => c.name == "$BuffDescriptorImmunity$d4fb14f4-7d7b-45b3-ab7f-d7eb6f9f7a63")
+                    .EditComponents<SpellImmunityToSpellDescriptor>(c =>
+                    {
+                        c.Descriptor = SpellDescriptor.Sickened | SpellDescriptor.Fatigue | SpellDescriptor.Nauseated | SpellDescriptor.Exhausted | SpellDescriptor.Paralysis
+                        | SpellDescriptor.Death | SpellDescriptor.Bleed | SpellDescriptor.VilderavnBleed | SpellDescriptor.Petrified | SpellDescriptor.NegativeLevel;
+                    }, c => c.name == "$SpellImmunityToSpellDescriptor$c0976aae-8934-4994-9b1a-f5614f7d4f26")
+                    .EditComponents<SpellImmunityToSpellDescriptor>(c =>
+                    {
+                        c.Descriptor = SpellDescriptor.MindAffecting | SpellDescriptor.Fear | SpellDescriptor.Compulsion | SpellDescriptor.Emotion | SpellDescriptor.Charm
+                        | SpellDescriptor.Daze | SpellDescriptor.Shaken | SpellDescriptor.Frightened | SpellDescriptor.Stun | SpellDescriptor.Confusion | SpellDescriptor.Sleep;
+                        c.m_CasterIgnoreImmunityFact = FeatureRefs.UndeadMindAffection.Cast<BlueprintUnitFactReference>().Reference;
+                    }, c => c.name == "$SpellImmunityToSpellDescriptor$fb56d182-0078-4f5e-a1dd-5730215f7e72")
                     .Configure();
             }
         }
