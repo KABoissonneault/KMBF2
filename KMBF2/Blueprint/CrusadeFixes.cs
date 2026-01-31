@@ -5,7 +5,12 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 
 using BlueprintCore.Blueprints.Configurators;
+using BlueprintCore.Blueprints.CustomConfigurators.Classes;
+using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Abilities;
 using BlueprintCore.Blueprints.References;
+using Kingmaker.Armies.TacticalCombat.Components;
+using Kingmaker.Blueprints.Classes.Spells;
+using Kingmaker.UnitLogic.FactLogic;
 
 namespace KMBF2.Blueprint
 {
@@ -22,6 +27,24 @@ namespace KMBF2.Blueprint
             {
                 UnitConfigurator.For(UnitRefs.ArmyHellknight)
                     .SetCharisma(14)
+                    .Configure();
+            }
+
+            // Lets it heal undead in your army. The Greater version does not have this issue
+            if(PatchUtils.StartPatch("General Channel Negative Undead"))
+            {
+                AbilityConfigurator.For(AbilityRefs.RitualChannelNegativeEnergyAbility)
+                    .AddComponent<TacticalCombatResurrection>()
+                    .Configure();
+            }
+
+            if(PatchUtils.StartPatch("Undead Mind-Affecting Immunity"))
+            {
+                FeatureConfigurator.For(FeatureRefs.ArmyNonLiving)
+                    .EditComponents<BuffDescriptorImmunity>(c =>
+                    {
+                        c.Descriptor |= SpellDescriptor.MindAffecting;
+                    }, c => c.name == "$BuffDescriptorImmunity$171e8301-c5a3-4b5d-bb0e-6f72bb3b8942")
                     .Configure();
             }
         }
